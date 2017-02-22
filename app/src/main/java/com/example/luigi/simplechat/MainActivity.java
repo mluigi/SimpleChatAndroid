@@ -7,7 +7,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -25,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ScrollView scrollView = (ScrollView) findViewById(R.id.scrollo);
-        scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
 
         EditText editText = (EditText) findViewById(R.id.editText);
         editText.setOnKeyListener((v, keyCode, event) -> {
@@ -108,11 +104,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
-
     private void listenToMessages() {
         try {
             //noinspection InfiniteLoopStatement
@@ -122,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         TextView textView = (TextView) findViewById(R.id.textView);
                         textView.append(inputLine.split("=", 2)[1] + "\n");
+                        ScrollView scrollView = (ScrollView) findViewById(R.id.scrollo);
+                        scrollView.post(() -> scrollView.fullScroll(ScrollView.FOCUS_DOWN));
                     });
                 } else if (inputLine.equals("KEEPALIVE")) {
                     clientData.out.println("KEEPALIVE");
