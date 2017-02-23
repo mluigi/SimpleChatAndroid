@@ -19,10 +19,6 @@ before_script:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
   - bash update_sdk.sh
 
-before_script:
-  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
-  - bash update_sdk.sh
-
 jdk: oraclejdk8
 
 env:
